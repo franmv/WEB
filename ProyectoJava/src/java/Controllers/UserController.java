@@ -175,7 +175,12 @@ public class UserController extends HttpServlet {
             String query = "SELECT id FROM User WHERE username = '%s' AND password = '%s'";
             ResultSet rs = Database.query(query, username, password);
             if (rs.first()) {
-                return rs.getInt("id");
+                int id = rs.getInt("id");
+                Usuario usuario = getUsuario(id);
+                if(usuario.getEstatusCuenta().equals("activa")){
+                   return id; 
+                }
+                System.out.println("Bloqueada");
             }
             else{
                 String query2 = "SELECT id FROM User WHERE username = '%s'";

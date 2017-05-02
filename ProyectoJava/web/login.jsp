@@ -17,8 +17,6 @@
         <p><label>Contraseña: <input type="password" name="pas" required></label></p>
         <% if (request.getParameter("error") != null) { %>
             <p class="error">Datos incorrectos.</p>
-        <% } else if(request.getParameter("error") == "2") {%>
-            <p class="error">Tu cuenta esta bloqueada, contacta a un administrador.</p>
         <% } %>
         <input type="submit" value="Login">
     </form>
