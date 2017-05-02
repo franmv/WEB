@@ -32,15 +32,14 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         String operation = request.getParameter("operation");
         String paramId = request.getParameter("id");
-        String url = "/404.jsp";
+        String url = "/Users.jsp";
         Boolean redirect = false; 
         if (operation.equals("create")){
             url = "/CreateUser.jsp";
         }
         if (!redirect)
         {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
+            response.sendRedirect(url);
         }
     }
     
@@ -49,30 +48,100 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         String operation = request.getParameter("operation"); 
         System.out.println("post");
+        boolean redirect = false;
+        String url = "/Users.jsp";
         
         Usuario usuario = null;
         if(operation.equals("create")){
-            usuario = crearUsuario(request); 
+            try {
+                if(validUsername(request.getParameter("username"))){
+                    usuario = crearUsuario(request);
+                } else{
+                    System.out.println("Invalid User");
+                    redirect = true;
+                    url = "CreateUser.jsp?error=1";
+                    response.sendRedirect(url);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if(operation.equals("update")){
             usuario = actualizarUsuario(request); 
         }
-        ServletContext context = getServletContext();
-        try { 
-            if(operation.equals("create")){
-                usuario.save();
+        else if(operation.equals("delete")){
+            try {
+                Usuario.delete(Integer.parseInt(request.getParameter("id")));
+            } catch (SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else if(operation.equals("update")){
-                usuario.update(); 
+            response.sendRedirect("Users.jsp");
+            redirect = true;
+        }
+        ServletContext context = getServletContext();
+        if(!redirect){
+            try { 
+                if(operation.equals("create")){
+                    usuario.save();
+                }
+                else if(operation.equals("update")){
+                    usuario.update(); 
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("User");
+            String tipo = usuario.getTipoUsuario();
+            if(tipo.equals("administrador") ){
+                url = "/Users.jsp";
+            }else if(tipo.equals("vendedor")){
+                url = "/Productos.jsp";
+            }else if(tipo.equals("gerente")) {
+                url = "/Inventario.jsp";
+            }else if(tipo.equals("ventas")) {
+                url = "/Ventas.jsp";
+            }else{
+                url = "404.jsp";
+            }
+            request.setAttribute("user", usuario);
+            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
+    }
+    
+    public int nextId() throws SQLException{
+        String query;
+        query = "SELECT max(id) FROM User"; 
+        try {
+            ResultSet rs = Database.query(query);
+            System.out.println("Next Id"+rs);
+            if (rs.first()) {
+                return rs.getInt("max(id)") + 1;
+            }
+            else{
+                return 0;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }  
-        System.out.println("User");
-        String url = "/Users.jsp";
-        request.setAttribute("user", usuario); 
-        RequestDispatcher dispatcher = context.getRequestDispatcher(url);
-        dispatcher.forward(request, response); 
+        return 0;
+    }
+    
+    public boolean validUsername(String username) throws SQLException{
+        String query;
+        query = "SELECT * FROM User WHERE username="+ "\""+username+ "\""; 
+        try {
+            ResultSet rs = Database.query(query);
+            if (rs.first()) {
+                return false;
+            }
+            else{
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        return false;
     }
     
     public static List<Usuario> all(){
@@ -109,6 +178,17 @@ public class UserController extends HttpServlet {
                 return rs.getInt("id");
             }
             else{
+                String query2 = "SELECT id FROM User WHERE username = '%s'";
+                ResultSet rs2 = Database.query(query2, username);
+                if(rs2.first()){
+                    int id = rs2.getInt("id");
+                    Usuario usuario = getUsuario(id);
+                    usuario.setNumLogin(usuario.getNumLogin() + 1);
+                    int logins = usuario.getNumLogin();
+                    int intentos = 3-logins;
+                    System.out.println("Quedan"+ intentos +"intentos");
+                    actualizarLogin(usuario);
+                }
                 return 0;
             }
         } catch (SQLException ex) {
@@ -159,8 +239,8 @@ public class UserController extends HttpServlet {
         return usuario;
     }
 
-    private Usuario crearUsuario(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("idUsuario"));
+    private Usuario crearUsuario(HttpServletRequest request) throws SQLException {
+        int id = nextId();
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String username = request.getParameter("username");
@@ -174,22 +254,27 @@ public class UserController extends HttpServlet {
         tipoUsuario, primerLogin);
         return usuario; 
     }
+    
+    private static void actualizarLogin(Usuario usuario) throws SQLException{
+        if(usuario.getNumLogin()>=3){
+            usuario.setEstatusCuenta("bloqueada");
+        }
+        usuario.update();
+        System.out.println("Actualizo usuario"+usuario.getEstatusCuenta()+usuario.getNumLogin());
+    }
 
     private Usuario actualizarUsuario(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("idUsuario"));
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
-        String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         int numLogin = Integer.parseInt(request.getParameter("numLogin"));
         String estatusCuenta = request.getParameter("estatusCuenta");
-        String tipoUsuario = request.getParameter("tipoUsuario");
         String primerLogin = request.getParameter("primerLogin");
         Usuario usuario = getUsuario(id);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
-        usuario.setUsername(username);
         usuario.setEmail(email);
         if(password.equals("")){
             password = usuario.getPassword();
@@ -197,8 +282,23 @@ public class UserController extends HttpServlet {
         usuario.setPassword(password);
         usuario.setNumLogin(numLogin);
         usuario.setEstatusCuenta(estatusCuenta);
-        usuario.setTipoUsuario(tipoUsuario);
         usuario.setPrimerLogin(primerLogin);
         return usuario; 
+    }
+    
+    static String primerLogin(int id) {
+        try {
+            String query = "SELECT primerLogin FROM User WHERE id = "+id;
+            ResultSet rs = Database.query(query);
+            if (rs.first()) {
+                return rs.getString("primerLogin");
+            }
+            else{
+                return "n";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "n";
     }
 }

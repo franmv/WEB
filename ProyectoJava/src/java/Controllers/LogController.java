@@ -38,22 +38,29 @@ public class LogController extends HttpServlet{
                             ResultSet rs = Database.query(query, username, password);
                             int id = UserController.validar(username, password);
                             String tipo = UserController.tipo(id);
+                            String primerLogin = UserController.primerLogin(id);
                             //String tipo = "administrador";
                             if (id != 0) {
                                 request.getSession().setAttribute("loggedIn", id);
-                                if(tipo.equals("administrador") ){
-                                    url = "Users.jsp";
-                                }else if(tipo.equals("vendedor")){
-                                    url = "Productos.jsp";
-                                }else if(tipo.equals("gerente")) {
-                                    url = "Inventario.jsp";
-                                }else if(tipo.equals("ventas")) {
-                                    url = "Ventas.jsp";
+                                if(primerLogin.equals("n")){
+                                    if(tipo.equals("administrador") ){
+                                        url = "Users.jsp";
+                                    }else if(tipo.equals("vendedor")){
+                                        url = "Productos.jsp";
+                                    }else if(tipo.equals("gerente")) {
+                                        url = "Inventario.jsp";
+                                    }else if(tipo.equals("ventas")) {
+                                        url = "Ventas.jsp";
+                                    }else{
+                                        url = "404.jsp";
+                                    }
                                 }else{
-                                    url = "404.jsp";
+                                    url = "EditUser.jsp?id="+id;
                                 }
-                            } else {
-                                url = "login.jsp?error=1\"";
+                            } else if(id == 0) {
+                                url = "login.jsp?error=1";
+                            } else if(id == -1){
+                                url = "login.jsp?error=2";
                             }
                         } catch (SQLException ex) {
                             Logger.getLogger(LogController.class.getName()).log(Level.SEVERE, null, ex);

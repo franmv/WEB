@@ -13,16 +13,18 @@
     </head>
     <body>
         <h1>Proyecto DAW</h1>
-        <h2>Nuevo Usuario</h2>
+        <h2>Editar Usuario</h2>
         <form action="UserController" method="post">
             <input type="hidden" name="operation" value="update"/>
-            <p><label>Id: <input type="text" name="idUsuario" required></label></p>
+            <% if (request.getParameter("id") != null) { %>
+                <input type="hidden" name="idUsuario" value="<%=request.getParameter("id")%>"/>
+            <% }else{ %>
+                <p><label>Id: <input type="text" name="idUsuario" required></label></p>
+            <% } %>
             <p><label>Nombre: <input type="text" name="nombre" required></label></p>
             <p><label>Apellido: <input type="text" name="apellido" required></label></p>
-            <p><label>Username: <input type="text" name="username" required></label></p>
             <p><label>Email: <input type="text" name="email" required></label></p>
-            <p><label>Password: <input type="text" name="password" ></label></p>
-            <p><label>Tipo Usuario: <input type="text" name="tipoUsuario" required></label></p>
+            <p><label>Password: <input type="password" name="password" ></label></p>
             <input type="hidden" name="numLogin" value="0"/>
             <input type="hidden" name="estatusCuenta" value="activa"/>
             <input type="hidden" name="primerLogin" value="n"/>

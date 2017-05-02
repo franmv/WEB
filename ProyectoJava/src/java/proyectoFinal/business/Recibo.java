@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Recibo implements Serializable {
     private Long idRecibo;
-    private Orden idOrden;
+    private int idOrden;
     private Date fecha;
     private double precio;
     private String tipo;
@@ -30,11 +30,11 @@ public class Recibo implements Serializable {
         return idRecibo;
     }
     
-    public Orden getIdOrden() {
+    public int getIdOrden() {
         return idOrden;
     }
     
-    public void setIdOrden(Orden idOrden) {
+    public void setIdOrden(int idOrden) {
         this.idOrden = idOrden;
     }
     

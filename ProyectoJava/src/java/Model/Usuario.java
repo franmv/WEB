@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -169,5 +170,13 @@ public class Usuario {
         return tipoUsuario;
     }
     
+    public static void delete(int id)  throws SQLException {
+        try {
+            String query = "DELETE FROM User WHERE id =" + id;
+            Database.update(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Candidate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
-

@@ -44,6 +44,13 @@
                                     <td><%= usuarios.get(i).getEstatusCuenta()%></td>
                                     <td><%= usuarios.get(i).getTipoUsuario()%></td>
                                     <td><%= usuarios.get(i).getPrimerLogin() %></td>
+                                    <td><a class="button" id="new" href="EditUser.jsp?id=<%=usuarios.get(i).getIdUsuario()%>">Edit</a></td>
+                                    <td><form action="UserController" method="post">
+                                            <input type="hidden" name="operation" value="delete"/>
+                                            <input type="hidden" name="id" value="<%=usuarios.get(i).getIdUsuario()%>"/>
+                                            <input type="submit" name="delete" value="delete"/>
+                                        </form>	 
+                                    </td>
                             </tr>
             <% } %>
             </tbody>
