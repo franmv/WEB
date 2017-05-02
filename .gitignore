@@ -1,0 +1,10 @@
+/ProyectoJava/build/web/WEB-INF/classes/bin/mysqld-debug 
+/ProyectoJava/build/web/WEB-INF/classes/lib/libmysqld-debug.a
+*.DS_STORE
+/ProyectoJava/dist/ProyectoJava.war
+/ProyectoJava/build/web/WEB-INF/classes/lib/libmysqld.a
+*.a
+/ProyectoJava/build/web/WEB-INF/classes/bin/
+/ProyectoJava/build
+/ProyectoJava/build.xml
+ProyectoJava/.idea/
