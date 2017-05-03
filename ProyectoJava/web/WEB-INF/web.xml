@@ -12,6 +12,10 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>Controllers.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductoController</servlet-name>
+        <servlet-class>Controllers.ProductoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CandidateController</servlet-name>
         <url-pattern>/CandidateController</url-pattern>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductoController</servlet-name>
+        <url-pattern>/ProductoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogController</servlet-name>

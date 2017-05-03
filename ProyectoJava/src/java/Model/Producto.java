@@ -113,5 +113,44 @@ public class Producto {
     public void setFoto(String foto) {
         this.foto =foto;
     }
+
+    public boolean update() {
+        String query;
+        query = "UPDATE producto "
+                + "SET nombreProducto="+ "\""+this.nombreProducto+ "\""+", idCategoria="+this.idCategoria+","
+                + " cantidadUnidades="+this.cantidadUnidades+", precio="+this.precio+", foto="+ "\""+this.foto+ "\""
+            +" WHERE idProducto="+this.idProducto;  
+        try {
+            Database.update(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }  
+        return true;
+    }
+
+    public boolean save() {
+        String query;
+        query = "INSERT INTO producto (idProducto, nombreProducto, idCategoria, cantidadUnidades, precio,"
+            + " foto)" +
+        "VALUES ('%d', '%s', '%d', '%d', '%f', '%s')";  
+        try {
+        Database.update(query, this.idProducto, this.nombreProducto, this.idCategoria, this.cantidadUnidades, 
+            this.precio, this.foto);
+        } catch (SQLException ex) {
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }  
+        return true;
+    }
+    
+    public static void delete(int id) {
+        try {
+            String query = "DELETE FROM producto WHERE idProducto =" + id;
+            Database.update(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

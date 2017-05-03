@@ -92,17 +92,7 @@ public class UserController extends HttpServlet {
             }
             System.out.println("User");
             String tipo = usuario.getTipoUsuario();
-            if(tipo.equals("administrador") ){
-                url = "/Users.jsp";
-            }else if(tipo.equals("vendedor")){
-                url = "/Productos.jsp";
-            }else if(tipo.equals("gerente")) {
-                url = "/Inventario.jsp";
-            }else if(tipo.equals("ventas")) {
-                url = "/Ventas.jsp";
-            }else{
-                url = "404.jsp";
-            }
+            url = "/Home.jsp";
             request.setAttribute("user", usuario);
             RequestDispatcher dispatcher = context.getRequestDispatcher(url);
             dispatcher.forward(request, response);

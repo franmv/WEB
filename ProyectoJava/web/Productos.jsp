@@ -40,10 +40,18 @@
                                     <td><%= productos.get(i).getCantidadUnidades()%></td>
                                     <td><%= productos.get(i).getPrecio()%></td>
                                     <td><%= productos.get(i).getFoto() %></td>
+                                    <td><a class="button" id="new" href="EditProducto.jsp?id=<%=productos.get(i).getIdProducto()%>">Edit</a></td>
+                                    <td><form action="ProductoController" method="post">
+                                            <input type="hidden" name="operation" value="delete"/>
+                                            <input type="hidden" name="id" value="<%=productos.get(i).getIdProducto()%>"/>
+                                            <input type="submit" name="delete" value="delete"/>
+                                        </form>	 
+                                    </td>
                             </tr>
             <% } %>
             </tbody>
     </table>
+    <a class="button" id="new" href="CreateProducto.jsp">Nuevo Producto</a>
     <a class="button" id="new" href="Home.jsp">Home</a>
     <footer>
         <p>&copy; Company 2017</p>
