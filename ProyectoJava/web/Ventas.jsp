@@ -12,8 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Proyecto DAW</h1>
+        <h1>Ventas</h1>
         
+        <a class="button" id="new" href="Home.jsp">Home</a>
         <footer>
             <p>&copy; Company 2017</p>
         </footer>

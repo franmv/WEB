@@ -56,6 +56,7 @@
             </tbody>
     </table>
     <a class="button" id="new" href="CreateUser.jsp">Nuevo Usuario</a>
+    <a class="button" id="new" href="Home.jsp">Home</a>
     <footer>
         <p>&copy; Company 2017</p>
     </footer>

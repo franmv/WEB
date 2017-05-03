@@ -12,6 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>HOME</h1>
+        <a class="button" id="new" href="Users.jsp">Usuarios</a>
+        <a class="button" id="new" href="Productos.jsp">Productos</a>
+        <a class="button" id="new" href="Ventas.jsp">Ventas</a>
+        <a class="button" id="new" href="Inventario.jsp">Inventario</a>
+        <a class="button" id="new" href="login.jsp">Login</a>
     </body>
 </html>

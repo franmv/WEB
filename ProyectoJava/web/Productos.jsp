@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Proyecto DAW</h1>
+        <h1>Productos</h1>
         <table class="order-table table">
             <thead>
                     <tr>
@@ -44,6 +44,7 @@
             <% } %>
             </tbody>
     </table>
+    <a class="button" id="new" href="Home.jsp">Home</a>
     <footer>
         <p>&copy; Company 2017</p>
     </footer>

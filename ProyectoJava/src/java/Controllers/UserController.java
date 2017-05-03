@@ -178,6 +178,10 @@ public class UserController extends HttpServlet {
                 int id = rs.getInt("id");
                 Usuario usuario = getUsuario(id);
                 if(usuario.getEstatusCuenta().equals("activa")){
+                   if(usuario.getNumLogin()>0){
+                       usuario.setNumLogin(0);
+                       usuario.update();
+                   } 
                    return id; 
                 }
                 System.out.println("Bloqueada");
@@ -278,12 +282,21 @@ public class UserController extends HttpServlet {
         String estatusCuenta = request.getParameter("estatusCuenta");
         String primerLogin = request.getParameter("primerLogin");
         Usuario usuario = getUsuario(id);
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setEmail(email);
+        if(nombre.equals("")){
+            nombre = usuario.getNombre();
+        }
+        if(apellido.equals("")){
+            apellido = usuario.getApellido();
+        }
+        if(email.equals("")){
+            email = usuario.getEmail();
+        }
         if(password.equals("")){
             password = usuario.getPassword();
         }
+        usuario.setNombre(nombre);
+        usuario.setApellido(apellido);
+        usuario.setEmail(email);
         usuario.setPassword(password);
         usuario.setNumLogin(numLogin);
         usuario.setEstatusCuenta(estatusCuenta);
