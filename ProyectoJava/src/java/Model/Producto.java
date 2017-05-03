@@ -123,7 +123,7 @@ public class Producto {
         try {
             Database.update(query);
         } catch (SQLException ex) {
-            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }  
         return true;

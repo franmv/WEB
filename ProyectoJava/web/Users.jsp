@@ -15,7 +15,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Proyecto DAW</h1>
+        <h1>Usuarios</h1>
+        <form method="post" action="LogController">
+            <input type="hidden" name="operation" value="logout"/>
+            <input type="submit" value="logout">
+        </form>
         <table class="order-table table">
             <thead>
                     <tr>

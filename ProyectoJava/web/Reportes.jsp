@@ -1,12 +1,12 @@
 <%-- 
-    Document   : Ventas
-    Created on : May 2, 2017, 2:09:48 AM
+    Document   : Inventario
+    Created on : May 2, 2017, 2:09:42 AM
     Author     : RicardoRS
 --%>
 
-<%@page import="Controllers.VentasController"%>
+<%@page import="Controllers.ReporteController"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Model.Ventas"%>
+<%@page import="Model.Reporte"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Ventas</h1>
+        <h1>Reportes de Inventario</h1>
         <form method="post" action="LogController">
             <input type="hidden" name="operation" value="logout"/>
             <input type="submit" value="logout">
@@ -25,24 +25,24 @@
                     <tr>
                             <th>Id</th>
                             <th>Id Producto</th>
-                            <th>Cantidad</th>
-                            <th>Cliente</th>
+                            <th>Id Usuario</th>
+                            <th>Comentario</th>
                             <th></th>
                     </tr>
             </thead>
             <tbody>
-                <%	List<Ventas> ventas = (List<Ventas>)VentasController.all();
-                    int size = (ventas != null) ? ventas.size() : 0;
+                <%	List<Reporte> reportes = (List<Reporte>)ReporteController.all();
+                    int size = (reportes != null) ? reportes.size() : 0;
                     for (int i=0; i<size; i++) { %>
                             <tr>
-                                    <td><%= ventas.get(i).getIdVenta() %></td>
-                                    <td><%= ventas.get(i).getIdProducto() %></td>
-                                    <td><%= ventas.get(i).getCantidad() %></td>
-                                    <td><%= ventas.get(i).getCliente()%></td>
-                                    <td><a class="button" id="new" href="EditVenta.jsp?id=<%=ventas.get(i).getIdVenta()%>">Edit</a></td>
-                                    <td><form action="VentasController" method="post">
+                                    <td><%= reportes.get(i).getIdReporte() %></td>
+                                    <td><%= reportes.get(i).getIdProducto() %></td>
+                                    <td><%= reportes.get(i).getIdUsuario() %></td>
+                                    <td><%= reportes.get(i).getComentario()%></td>
+                                    <td><a class="button" id="new" href="EditReporte.jsp?id=<%=reportes.get(i).getIdReporte()%>">Edit</a></td>
+                                    <td><form action="ReporteController" method="post">
                                             <input type="hidden" name="operation" value="delete"/>
-                                            <input type="hidden" name="id" value="<%=ventas.get(i).getIdVenta()%>"/>
+                                            <input type="hidden" name="id" value="<%=reportes.get(i).getIdReporte()%>"/>
                                             <input type="submit" name="delete" value="delete"/>
                                         </form>	 
                                     </td>
@@ -50,7 +50,7 @@
             <% } %>
             </tbody>
     </table>
-    <a class="button" id="new" href="CreateVenta.jsp">Nueva Venta</a>
+    <a class="button" id="new" href="CreateReporte.jsp">Nuevo Reporte</a>
     <a class="button" id="new" href="Home.jsp">Home</a>
         <footer>
             <p>&copy; Company 2017</p>

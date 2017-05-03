@@ -175,7 +175,7 @@ public class Usuario {
             String query = "DELETE FROM User WHERE id =" + id;
             Database.update(query);
         } catch (SQLException ex) {
-            Logger.getLogger(Candidate.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

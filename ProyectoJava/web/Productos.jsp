@@ -17,6 +17,10 @@
     </head>
     <body>
         <h1>Productos</h1>
+        <form method="post" action="LogController">
+            <input type="hidden" name="operation" value="logout"/>
+            <input type="submit" value="logout">
+        </form>
         <table class="order-table table">
             <thead>
                     <tr>

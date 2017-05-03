@@ -13,10 +13,13 @@
     </head>
     <body>
         <h1>HOME</h1>
+        <form method="post" action="LogController">
+            <input type="hidden" name="operation" value="logout"/>
+            <input type="submit" value="logout">
+        </form>
         <a class="button" id="new" href="Users.jsp">Usuarios</a>
         <a class="button" id="new" href="Productos.jsp">Productos</a>
         <a class="button" id="new" href="Ventas.jsp">Ventas</a>
-        <a class="button" id="new" href="Inventario.jsp">Inventario</a>
-        <a class="button" id="new" href="login.jsp">Login</a>
+        <a class="button" id="new" href="Reportes.jsp">Reportes</a>
     </body>
 </html>

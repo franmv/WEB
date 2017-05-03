@@ -6,7 +6,6 @@
 package Controllers;
 
 import Database.Database;
-import Model.Candidate;
 import Model.Producto;
 import java.io.IOException;
 import java.sql.ResultSet;
