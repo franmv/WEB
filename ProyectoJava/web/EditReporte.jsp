@@ -22,7 +22,7 @@
                 <p><label>Id: <input type="text" name="idReporte" required></label></p>
             <% } %>
             <p><label>Producto <input type="number" name="idProducto" required></label></p>
-            <input type="hidden" name="idUsuario" value="1"/>
+            <input type="hidden" name="idUsuario" value="1";/>
             <p><label>Comentario: <input type="text" name="comentario" required></label></p>
             <br>
             <input type="submit" name="crear"/>

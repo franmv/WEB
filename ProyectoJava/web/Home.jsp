@@ -21,5 +21,6 @@
         <a class="button" id="new" href="Productos.jsp">Productos</a>
         <a class="button" id="new" href="Ventas.jsp">Ventas</a>
         <a class="button" id="new" href="Reportes.jsp">Reportes</a>
+        <a class="button" id="new" href="http://localhost:8888/BusquedaUsuariosPHP/">Reporte Usuarios</a>
     </body>
 </html>

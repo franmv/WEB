@@ -1,0 +1,105 @@
+html *{
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+body{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 87.5%;
+    width: 964px;
+    background-color: white;
+    margin: 15px auto;
+    padding: 15px 25px;
+    border: 1px solid black;
+}
+form[id="menu"]{
+    text-align: center;
+}
+section, aside, h1, h2, p, ul {
+    margin: 0;
+    padding: 0;
+}
+section, aside {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+h1 {
+    font-size: 175%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+input[name="search_text"] {
+    font-size:20px;
+    text-align: center;
+    width: 45.5%;
+    height: 40px;
+    color: Gray;
+    font-style: bold;
+}
+#middle{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color:#E42157;
+}
+
+table#tbProductos {
+    font-size:16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 50%;
+}
+
+#tbProductos td, #tbProductos th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#tbProductos tr:nth-child(even){background-color: #f2f2f2}
+
+#tbProductos th {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+header {
+    padding-bottom: 2em;
+    border-bottom: 2px solid #ef9c00;
+}
+
+#barra_nav {
+    clear: left;
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid #ef9c00;
+    text-align: left;
+}
+#barra_nav ul {
+    margin-bottom: .5em;
+    list-style: none;
+    padding-top: .5em;
+}
+#barra_nav li {
+    display: inline;
+    padding: 0 1.5em;
+    border-left: 2px solid black;
+}
+
+footer {
+    clear: both;
+    margin-top: 1em;
+    border-top: 2px solid #ef9c00;
+    padding-top: 0.7em;
+}
+footer p {
+    font-size: 80%;
+    text-align: right;
+}
